@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="ko" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIGITAL MONSTER REFERENCE BOOK | 디지털 월드 디지몬 도감</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Orbitron, JetBrains Mono, Noto Sans KR -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;700;900&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans KR"', 'sans-serif'],
+                        cyber: ['"Orbitron"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        digi: {
+                            bg: '#060b14',
+                            panel: '#0c1526',
+                            card: '#101d35',
+                            border: '#1e3a5f',
+                            cyan: '#00f0ff',
+                            blue: '#2563eb',
+                            orange: '#ff6b00',
+                            gold: '#fbbf24',
+                            virus: '#ef4444',
+                            vaccine: '#38bdf8',
+                            data: '#10b981',
+                            free: '#a855f7'
+                        }
+                    },
+                    boxShadow: {
+                        'neon-cyan': '0 0 15px rgba(0, 240, 255, 0.35)',
+                        'neon-orange': '0 0 15px rgba(255, 107, 0, 0.35)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Cyberpunk Digital Grid Background */
+        body {
+            background-color: #060b14;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(0, 240, 255, 0.08) 0%, transparent 55%),
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 100% 100%, 32px 32px, 32px 32px;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 7px; height: 7px; }
+        ::-webkit-scrollbar-track { background: #060b14; }
+        ::-webkit-scrollbar-thumb { background: #1e3a5f; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00f0ff; }
+
+        /* Hologram Scanline Effect */
+        .holo-scan {
+            position: relative;
+            overflow: hidden;
+        }
+        .holo-scan::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 240, 255, 0.03) 0px,
+                rgba(0, 240, 255, 0.03) 1px,
+                transparent 1px,
+                transparent 3px
+            );
+            pointer-events: none;
+        }
+
+        /* Digimon Card Hover Glow */
+        .digimon-card {
+            transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+        .digimon-card:hover {
+            transform: translateY(-5px);
+            border-color: #00f0ff;
+            box-shadow: 0 10px 25px -5px rgba(0, 240, 255, 0.25), 0 0 12px rgba(0, 240, 255, 0.2);
+        }
+
+        /* Corner Tech Accents */
+        .tech-corner {
+            clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+        }
+
+        @keyframes pulseSlow {
+            0%, 100% { opacity: 0.75; }
+            50% { opacity: 1; }
+        }
+        .animate-pulse-slow {
+            animation: pulseSlow 3s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="text-slate-100 min-h-screen flex flex-col antialiased selection:bg-cyan-500 selection:text-slate-950">
+
+    <!-- Top Terminal Header -->
+    <header class="sticky top-0 z-30 bg-digi-panel/90 backdrop-blur-md border-b border-digi-border shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5">
+            <div class="flex flex-wrap items-center justify-between gap-4">
+                <!-- Brand Title -->
+                <div class="flex items-center gap-3.5">
+                    <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-700 p-0.5 shadow-neon-cyan shrink-0">
+                        <div class="w-full h-full bg-digi-bg rounded-[10px] flex items-center justify-center relative overflow-hidden">
+                            <!-- Digital Crest SVG Icon -->
+                            <svg class="w-7 h-7 text-cyan-400" viewBox="0 0 36 36" fill="none">
+                                <circle cx="18" cy="18" r="14" stroke="currentColor" stroke-width="2" stroke-dasharray="4 2"/>
+                                <polygon points="18,6 28,18 18,30 8,18" stroke="#ff6b00" stroke-width="2" fill="rgba(255,107,0,0.15)"/>
+                                <circle cx="18" cy="18" r="3.5" fill="#00f0ff"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="px-2 py-0.5 text-[10px] font-mono font-bold tracking-widest uppercase bg-cyan-500/15 text-cyan-400 border border-cyan-500/40 rounded">SYS.VER 4.26 // DIGITAL WORLD DB</span>
+                        </div>
+                        <h1 class="font-cyber font-black text-lg sm:text-2xl tracking-wider text-white mt-0.5 flex items-center gap-2">
+                            DIGIMON <span class="text-cyan-400">REFERENCE</span> <span class="text-digi-orange hidden sm:inline">BOOK</span>
+                        </h1>
+                    </div>
+                </div>
+
+                <!-- Status Counters & Attribute Chart Trigger -->
+                <div class="flex items-center gap-2.5 sm:gap-4">
+                    <!-- Total Digimon Counter -->
+                    <div class="px-3 py-1.5 rounded-lg bg-digi-card border border-digi-border flex items-center gap-2.5">
+                        <div class="text-right">
+                            <div class="text-[10px] font-mono text-slate-400 uppercase">Registered</div>
+                            <div class="font-cyber font-bold text-sm sm:text-base text-cyan-400" id="totalCountDisplay">25 <span class="text-xs font-sans font-normal text-slate-400">종</span></div>
+                        </div>
+                        <i class="fa-solid fa-database text-cyan-500/70 text-lg"></i>
+                    </div>
+
+                    <!-- Partner Favorites Counter -->
+                    <button onclick="toggleFavoriteOnly()" id="headerFavBtn" class="px-3 py-1.5 rounded-lg bg-digi-card border border-digi-border hover:border-amber-400 transition-all flex items-center gap-2.5 group" title="파트너 디지몬(즐겨찾기) 필터 토글">
+                        <div class="text-right">
+                            <div class="text-[10px] font-mono text-slate-400 uppercase">Partners</div>
+                            <div class="font-cyber font-bold text-sm sm:text-base text-amber-400" id="favCountDisplay">0 <span class="text-xs font-sans font-normal text-slate-400">체</span></div>
+                        </div>
+                        <i class="fa-solid fa-star text-amber-400 group-hover:scale-110 transition-transform text-lg"></i>
+                    </button>
+
+                    <!-- Attribute Compatibility Guide Button -->
+                    <button onclick="openTypeChartModal()" class="px-3.5 py-2.5 rounded-lg bg-gradient-to-r from-cyan-600/30 to-blue-600/30 hover:from-cyan-500/40 hover:to-blue-500/40 border border-cyan-500/50 text-cyan-300 text-xs font-bold flex items-center gap-2 transition-all shadow-sm">
+                        <i class="fa-solid fa-diagram-project"></i>
+                        <span class="hidden md:inline">속성 상성표</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Control & Search Dashboard -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 space-y-6">
+
+        <!-- Search, Filter & Sort Control Panel -->
+        <section class="bg-digi-panel/90 border border-digi-border rounded-2xl p-4 sm:p-5 shadow-xl space-y-4">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-3.5 items-center">
+                <!-- Search Input -->
+                <div class="lg:col-span-5 relative">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-cyan-400 text-sm"></i>
+                    <input type="text" id="searchInput" placeholder="디지몬 이름(한/영), 종족, 필살기 검색 (예: 오메가몬, 성기사형, 그레이 소드)..."
+                        class="w-full pl-10 pr-9 py-2.5 bg-digi-bg border border-digi-border focus:border-cyan-400 rounded-xl text-sm text-white placeholder-slate-500 outline-none transition-all font-sans">
+                    <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white">
+                        <i class="fa-solid fa-circle-xmark"></i>
+                    </button>
+                </div>
+
+                <!-- Attribute Filter Pills -->
+                <div class="lg:col-span-4 flex flex-wrap items-center gap-1.5">
+                    <span class="text-[11px] font-mono text-slate-400 mr-1"><i class="fa-solid fa-shield-halved mr-1 text-cyan-400"></i>속성:</span>
+                    <button onclick="setAttrFilter('ALL')" data-attr="ALL" class="attr-btn active px-2.5 py-1.5 rounded-lg text-xs font-bold bg-cyan-500 text-slate-950 transition-all">전체</button>
+                    <button onclick="setAttrFilter('백신')" data-attr="백신" class="attr-btn px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-digi-card border border-digi-border text-sky-400 hover:border-sky-400 transition-all">백신</button>
+                    <button onclick="setAttrFilter('데이터')" data-attr="데이터" class="attr-btn px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-digi-card border border-digi-border text-emerald-400 hover:border-emerald-400 transition-all">데이터</button>
+                    <button onclick="setAttrFilter('바이러스')" data-attr="바이러스" class="attr-btn px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-digi-card border border-digi-border text-rose-400 hover:border-rose-400 transition-all">바이러스</button>
+                    <button onclick="setAttrFilter('프리')" data-attr="프리" class="attr-btn px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-digi-card border border-digi-border text-purple-400 hover:border-purple-400 transition-all">프리</button>
+                </div>
+
+                <!-- Sort & Favorites Toggle -->
+                <div class="lg:col-span-3 flex items-center justify-between lg:justify-end gap-2">
+                    <select id="sortSelect" onchange="renderGrid()" class="bg-digi-bg border border-digi-border focus:border-cyan-400 rounded-xl px-3 py-2 text-xs font-semibold text-slate-200 outline-none cursor-pointer">
+                        <option value="id">도감 번호순 (No.001~)</option>
+                        <option value="name">이름순 (가나다)</option>
+                        <option value="power">전투력순 (총 스탯)</option>
+                    </select>
+
+                    <button id="favFilterBtn" onclick="toggleFavoriteOnly()" class="px-3 py-2 rounded-xl border border-digi-border bg-digi-card text-xs font-semibold text-slate-300 hover:border-amber-400 flex items-center gap-1.5 transition-all shrink-0">
+                        <i class="fa-regular fa-star text-amber-400" id="favFilterIcon"></i>
+                        <span>즐겨찾기</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Generation / Stage Filter Bar -->
+            <div class="pt-3 border-t border-digi-border/60 flex flex-wrap items-center justify-between gap-2">
+                <div class="flex flex-wrap items-center gap-1.5">
+                    <span class="text-[11px] font-mono text-slate-400 mr-1"><i class="fa-solid fa-dna mr-1 text-digi-orange"></i>세대:</span>
+                    <button onclick="setStageFilter('ALL')" data-stage="ALL" class="stage-btn active px-3 py-1 rounded-lg text-xs font-bold bg-digi-orange text-white shadow-neon-orange transition-all">전체 세대</button>
+                    <button onclick="setStageFilter('유년기')" data-stage="유년기" class="stage-btn px-3 py-1 rounded-lg text-xs font-medium bg-digi-bg border border-digi-border text-slate-300 hover:border-digi-orange transition-all">유년기</button>
+                    <button onclick="setStageFilter('성장기')" data-stage="성장기" class="stage-btn px-3 py-1 rounded-lg text-xs font-medium bg-digi-bg border border-digi-border text-slate-300 hover:border-digi-orange transition-all">성장기</button>
+                    <button onclick="setStageFilter('성숙기')" data-stage="성숙기" class="stage-btn px-3 py-1 rounded-lg text-xs font-medium bg-digi-bg border border-digi-border text-slate-300 hover:border-digi-orange transition-all">성숙기</button>
+                    <button onclick="setStageFilter('완전체')" data-stage="완전체" class="stage-btn px-3 py-1 rounded-lg text-xs font-medium bg-digi-bg border border-digi-border text-slate-300 hover:border-digi-orange transition-all">완전체</button>
+                    <button onclick="setStageFilter('궁극체')" data-stage="궁극체" class="stage-btn px-3 py-1 rounded-lg text-xs font-medium bg-digi-bg border border-digi-border text-slate-300 hover:border-digi-orange transition-all">궁극체</button>
+                    <button onclick="setStageFilter('초궁극체')" data-stage="초궁극체" class="stage-btn px-3 py-1 rounded-lg text-xs font-medium bg-digi-bg border border-digi-border text-slate-300 hover:border-digi-orange transition-all">초궁극체</button>
+                </div>
+
+                <div class="text-xs font-mono text-slate-400">
+                    검색 결과: <span id="filteredCountText" class="text-cyan-400 font-bold">25</span> 개체
+                </div>
+            </div>
+        </section>
+
+        <!-- Digimon Grid Container -->
+        <section id="digimonGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+            <!-- Cards dynamically injected here -->
+        </section>
+
+        <!-- Empty Search Result State -->
+        <div id="emptyState" class="hidden text-center py-20 bg-digi-panel/60 border border-digi-border rounded-2xl">
+            <div class="w-16 h-16 rounded-full bg-slate-800/80 border border-slate-700 flex items-center justify-center mx-auto mb-4 text-cyan-400 text-2xl">
+                <i class="fa-solid fa-satellite-dish"></i>
+            </div>
+            <h3 class="font-cyber text-lg font-bold text-white">NO DIGITAL DATA FOUND</h3>
+            <p class="text-sm text-slate-400 mt-1">조건에 일치하는 디지몬 데이터가 디지털 월드에 존재하지 않습니다.</p>
+            <button onclick="resetAllFilters()" class="mt-5 px-5 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs transition-all">
+                <i class="fa-solid fa-rotate-left mr-1.5"></i>필터 전체 초기화
+            </button>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-digi-border/70 bg-digi-panel/60 py-6 px-4 text-center text-xs text-slate-500 font-mono">
+        <p>DIGITAL MONSTER REFERENCE ARCHIVE // POWERED BY DIGIVICE ANALYZER OS</p>
+    </footer>
+
+    <!-- ========================================================================= -->
+    <!-- DIGIVICE ANALYZER MODAL (DIGIMON DETAIL VIEW) -->
+    <!-- ========================================================================= -->
+    <div id="detailModal" class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-6 bg-slate-950/85 backdrop-blur-md overflow-y-auto" onclick="closeDetailModal(event)">
+        <div class="relative w-full max-w-4xl bg-digi-panel border-2 border-cyan-500/60 rounded-2xl shadow-[0_0_50px_rgba(0,240,255,0.2)] overflow-hidden my-auto" onclick="event.stopPropagation()">
+            
+            <!-- Modal Top Terminal Bar -->
+            <div class="bg-gradient-to-r from-slate-900 via-digi-card to-slate-900 px-5 py-3 border-b border-digi-border flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                    <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></span>
+                    <span class="font-cyber text-xs sm:text-sm font-bold tracking-widest text-cyan-400">DIGIVICE ANALYZER // DATA PROFILE</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button id="modalFavBtn" onclick="toggleModalFavorite()" class="px-3 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-600 text-xs font-bold flex items-center gap-1.5 transition-all">
+                        <i class="fa-regular fa-star text-amber-400" id="modalFavIcon"></i>
+                        <span id="modalFavText">파트너 등록</span>
+                    </button>
+                    <button onclick="forceCloseDetailModal()" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-rose-500/20 hover:text-rose-400 border border-slate-700 flex items-center justify-center text-slate-300 transition-colors">
+                        <i class="fa-solid fa-xmark text-base"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Modal Body Content -->
+            <div class="p-5 sm:p-7 max-h-[82vh] overflow-y-auto space-y-6">
+                
+                <!-- Top Section: Artwork + Core Metadata -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                    <!-- Hologram Artwork Frame -->
+                    <div class="md:col-span-5">
+                        <div class="relative rounded-2xl bg-digi-bg border border-cyan-500/40 p-6 flex flex-col items-center justify-center holo-scan shadow-inner">
+                            <span id="modalNo" class="absolute top-3 left-3.5 font-cyber text-xs font-bold text-cyan-400/80">No.001</span>
+                            <span id="modalFieldBadge" class="absolute top-3 right-3.5 px-2 py-0.5 rounded text-[10px] font-mono bg-slate-800/90 border border-slate-700 text-slate-300">네이처 스피리츠</span>
+                            
+                            <!-- Custom SVG Illustration Container -->
+                            <div id="modalArtwork" class="w-44 h-44 sm:w-52 sm:h-52 my-2 flex items-center justify-center drop-shadow-[0_0_20px_rgba(0,240,255,0.3)]">
+                                <!-- SVG injected via JS -->
+                            </div>
+
+                            <!-- Total Combat Power Pill -->
+                            <div class="mt-2 px-4 py-1 rounded-full bg-cyan-950/70 border border-cyan-500/40 flex items-center gap-2">
+                                <span class="text-[10px] font-mono text-cyan-300 uppercase">Total Power</span>
+                                <span id="modalTotalPower" class="font-cyber font-bold text-sm text-white">450</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Name, Badges, Description -->
+                    <div class="md:col-span-7 space-y-4">
+                        <div>
+                            <div class="flex flex-wrap items-center gap-2 mb-1.5">
+                                <span id="modalStageBadge" class="px-2.5 py-0.5 rounded-md text-xs font-bold bg-digi-orange/20 text-digi-orange border border-digi-orange/40">성장기</span>
+                                <span id="modalAttrBadge" class="px-2.5 py-0.5 rounded-md text-xs font-bold bg-sky-500/20 text-sky-400 border border-sky-500/40">백신</span>
+                                <span id="modalTypeBadge" class="px-2.5 py-0.5 rounded-md text-xs font-medium bg-slate-800 text-slate-300 border border-slate-700">파충류형</span>
+                            </div>
+                            <h2 id="modalNameKo" class="text-2xl sm:text-3xl font-black text-white tracking-tight">아구몬</h2>
+                            <p id="modalNameEn" class="font-cyber text-xs sm:text-sm text-cyan-400 tracking-widest uppercase mt-0.5">AGUMON</p>
+                        </div>
+
+                        <!-- Official Encyclopedia Lore Box -->
+                        <div class="p-4 rounded-xl bg-digi-bg/90 border border-digi-border relative">
+                            <div class="text-[10px] font-mono text-cyan-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                <i class="fa-solid fa-file-lines"></i> OFFICIAL PROFILE // 도감 해설
+                            </div>
+                            <p id="modalDesc" class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                                두 발로 걸어 다니는 파충류형 디지몬. 아직 성장기라 힘은 약하지만 성격은 상당히 흉포해 무서움을 모른다.
+                            </p>
+                        </div>
+
+                        <!-- Stats Bars -->
+                        <div class="space-y-2 pt-1">
+                            <div class="text-[11px] font-mono text-slate-400 uppercase flex justify-between">
+                                <span>PARAMETER ANALYSIS (능력치 분석)</span>
+                                <span class="text-cyan-400">MAX 100</span>
+                            </div>
+                            <div id="modalStatsContainer" class="space-y-2">
+                                <!-- Stat bars injected via JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Middle Section: Special Moves (필살기) -->
+                <div class="space-y-2.5">
+                    <h3 class="font-cyber text-xs sm:text-sm font-bold text-digi-orange tracking-wider uppercase flex items-center gap-2">
+                        <i class="fa-solid fa-bolt"></i> SPECIAL MOVES // 필살기 데이터
+                    </h3>
+                    <div id="modalSkillsContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <!-- Skills injected via JS -->
+                    </div>
+                </div>
+
+                <!-- Bottom Section: Interactive Evolution Tree -->
+                <div class="space-y-3 pt-2 border-t border-digi-border">
+                    <div class="flex items-center justify-between">
+                        <h3 class="font-cyber text-xs sm:text-sm font-bold text-cyan-400 tracking-wider uppercase flex items-center gap-2">
+                            <i class="fa-solid fa-code-branch"></i> EVOLUTION LINE // 진화 트리 (클릭 시 개체 이동)
+                        </h3>
+                    </div>
+                    <div id="modalEvoContainer" class="flex flex-wrap items-center justify-center gap-2 sm:gap-4 p-4 rounded-xl bg-digi-bg/80 border border-digi-border">
+                        <!-- Evolution nodes injected via JS -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- ATTRIBUTE COMPATIBILITY MODAL (상성 가이드) -->
+    <!-- ========================================================================= -->
+    <div id="typeChartModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/85 backdrop-blur-sm" onclick="closeTypeChartModal(event)">
+        <div class="w-full max-w-lg bg-digi-panel border border-cyan-500/50 rounded-2xl p-6 shadow-2xl space-y-5" onclick="event.stopPropagation()">
+            <div class="flex items-center justify-between border-b border-digi-border pb-3">
+                <h3 class="font-cyber font-bold text-base text-cyan-400 flex items-center gap-2">
+                    <i class="fa-solid fa-shield-virus"></i> ATTRIBUTE MATRIX // 속성 상성 시스템
+                </h3>
+                <button onclick="document.getElementById('typeChartModal').classList.add('hidden'); document.getElementById('typeChartModal').classList.remove('flex');" class="text-slate-400 hover:text-white">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Triangle Visual SVG -->
+            <div class="bg-digi-bg rounded-xl p-4 border border-digi-border flex flex-col items-center">
+                <svg class="w-64 h-48" viewBox="0 0 260 190">
+                    <!-- Triangle Arrows -->
+                    <defs>
+                        <marker id="arrowCyan" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                            <path d="M0,0 L0,6 L7,3 z" fill="#00f0ff" />
+                        </marker>
+                    </defs>
+                    <!-- Vaccine -> Virus -->
+                    <line x1="115" y1="45" x2="65" y2="125" stroke="#00f0ff" stroke-width="2.5" marker-end="url(#arrowCyan)" />
+                    <text x="65" y="82" fill="#38bdf8" font-size="11" font-weight="bold">유리 (강함)</text>
+                    <!-- Virus -> Data -->
+                    <line x1="85" y1="148" x2="175" y2="148" stroke="#00f0ff" stroke-width="2.5" marker-end="url(#arrowCyan)" />
+                    <text x="112" y="166" fill="#ef4444" font-size="11" font-weight="bold">유리 (강함)</text>
+                    <!-- Data -> Vaccine -->
+                    <line x1="195" y1="125" x2="145" y2="45" stroke="#00f0ff" stroke-width="2.5" marker-end="url(#arrowCyan)" />
+                    <text x="178" y="82" fill="#10b981" font-size="11" font-weight="bold">유리 (강함)</text>
+
+                    <!-- Nodes -->
+                    <g transform="translate(130, 30)">
+                        <rect x="-38" y="-16" width="76" height="32" rx="8" fill="#0c1526" stroke="#38bdf8" stroke-width="2"/>
+                        <text x="0" y="5" text-anchor="middle" fill="#38bdf8" font-size="13" font-weight="bold">백신 (Va)</text>
+                    </g>
+                    <g transform="translate(55, 148)">
+                        <rect x="-42" y="-16" width="84" height="32" rx="8" fill="#0c1526" stroke="#ef4444" stroke-width="2"/>
+                        <text x="0" y="5" text-anchor="middle" fill="#ef4444" font-size="13" font-weight="bold">바이러스 (Vi)</text>
+                    </g>
+                    <g transform="translate(205, 148)">
+                        <rect x="-40" y="-16" width="80" height="32" rx="8" fill="#0c1526" stroke="#10b981" stroke-width="2"/>
+                        <text x="0" y="5" text-anchor="middle" fill="#10b981" font-size="13" font-weight="bold">데이터 (Da)</text>
+                    </g>
+                </svg>
+            </div>
+
+            <div class="space-y-2 text-xs text-slate-300 leading-relaxed">
+                <p><strong class="text-sky-400">• 백신 (Vaccine):</strong> 바이러스종을 정화하고 방어하기 위해 생성된 속성. 바이러스에 강하지만 데이터에 약합니다.</p>
+                <p><strong class="text-rose-400">• 바이러스 (Virus):</strong> 환경을 자신에게 유리하게 개조·침식하는 속성. 데이터에 강하지만 백신에 약합니다.</p>
+                <p><strong class="text-emerald-400">• 데이터 (Data):</strong> 디지털 월드의 환경에 순응하며 살아가는 속성. 백신에 강하지만 바이러스에 약합니다.</p>
+                <p><strong class="text-purple-400">• 프리 (Free):</strong> 고대종이나 특수 진화체에 나타나는 속성으로 기본 3속성 상성의 영향을 받지 않습니다.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="bg-digi-card border border-cyan-400 text-white px-4 py-2.5 rounded-xl shadow-neon-cyan text-xs font-bold flex items-center gap-2">
+            <i class="fa-solid fa-microchip text-cyan-400"></i>
+            <span id="toastMsg">메시지</span>
+        </div>
+    </div>
+
+    <script>
+        // =========================================================================
+        // 1. CUSTOM SVG ARTWORK GENERATOR (UNIQUE EMBLEM / SILHOUETTE PER DIGIMON)
+        // =========================================================================
+        function getDigimonSVG(artKey) {
+            const svgs = {
+                koromon: `
+                    <svg viewBox="0 0 120 120" class="w-full h-full">
+                        <defs><radialGradient id="koroG" cx="50%" cy="40%" r="55%"><stop offset="0%" stop-color="#ffb6c1"/><stop offset="100%" stop-color="#f472b6"/></radialGradient></defs>
+                        <path d="M32 45 C12 20, 8 45, 28 60 Z" fill="#f472b6" stroke="#be185d" stroke-width="2"/>
+                        <path d="M88 45 C108 20, 112 45, 92 60 Z" fill="#f472b6" stroke="#be185d" stroke-width="2"/>
+                        <circle cx="60" cy="65" r="34" fill="url(#koroG)" stroke="#be185d" stroke-width="2.5"/>
+                        <ellipse cx="47" cy="58" rx="4.5" ry="6.5" fill="#dc2626"/>
+                        <ellipse cx="73" cy="58" rx="4.5" ry="6.5" fill="#dc2626"/>
+                        <circle cx="48" cy="56" r="1.8" fill="#fff"/>
+                        <circle cx="74" cy="56" r="1.8" fill="#fff"/>
+                        <path d="M44 74 Q60 88 76 74 Z" fill="#991b1b"/>
+                        <polygon points="48,74 52,80 56,74" fill="#fff"/>
+                        <polygon points="64,74 68,80 72,74" fill="#fff"/>
+                    </svg>`,
+                agumon: `
+                    <svg viewBox="0 0 120 120" class="w-full h-full">
+                        <defs><linearGradient id="aguG" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#fbbf24"/><stop offset="100%" stop-color="#ea580c"/></linearGradient></defs>
+                        <circle cx="60" cy="60" r="50" fill="rgba(234,88,12,0.12)" stroke="#f97316" stroke-width="1.5" stroke-dasharray="4 3"/>
+                        <path d="M35 85 Q20 60 38 40 Q52 22 72 28 Q92 35 88 55 Q82 68 68 68 L74 92 L45 92 Z" fill="url(#aguG)" stroke="#9a3412" stroke-width="2.5"/>
+                        <polygon points="56,38 64,45 55,50" fill="#15803d"/>
+                        <circle cx="72" cy="42" r="4" fill="#10b981"/>
+                        <circle cx="73" cy="41" r="1.5" fill="#fff"/>
+                        <path d="M68 55 L88 53" stroke="#9a3412" stroke-width="2.5" stroke-linecap="round"/>
+                        <circle cx="94" cy="48" r="5" fill="#ffedd5" opacity="0.8"/>
+                        <circle cx="102" cy="44" r="3" fill="#f97316"/>
+                    </svg>`,
+                gabumon: `
+                    <svg viewBox="0 0 120 120" class="w-full h-full">
+                        <circle cx="60" cy="60" r="50" fill="rgba(56,189,248,0.12)" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="4 3"/>
+                        <path d="M30 85 L35 45 L52 32 L60 15 L68 32 L85 45 L90 85 Z" fill="#e0f2fe" stroke="#0284c7" stroke-width="2.5"/>
+                        <polygon points="60,15 54,32 66,32" fill="#fbbf24" stroke="#b45309" stroke-width="1.5"/>
+                        <path d="M40 52 L50 56 M80 52 L70 56 M38 68 L52 68 M82 68 L68 68" stroke="#2563eb" stroke-width="3" stroke-linecap="round"/>
+                        <rect x="44" y="62" width="32" height="24" rx="8" fill="#fef08a" stroke="#ca8a04" stroke-width="2"/>
+                        <circle cx="52" cy="52" r="3.5" fill="#dc2626"/>
+                        <circle cx="68" cy="52" r="3.5" fill="#dc2626"/>
+                    </svg>`,
+                patamon: `
+                    <svg viewBox="0 0 120 120" class="w-full h-full">
+                        <path d="M34 55 C8 35, 6 68, 32 72 Z" fill="#fdba74" stroke="#c2410c" stroke-width="2"/>
+                        <path d="M86 55 C112 35, 114 68, 88 72 Z" fill="#fdba74" stroke="#c2410c" stroke-width="2"/>
+                        <ellipse cx="60" cy="65" rx="28" ry="24" fill="#fb923c" stroke="#c2410c" stroke-width="2.5"/>
+                        <ellipse cx="60" cy="73" rx="20" ry="13" fill="#ffedd5"/>
+                        <circle cx="50" cy="60" r="4" fill="#1d4ed8"/>
+                        <circle cx="70" cy="60" r="4" fill="#1d4ed8"/>
+                        <circle cx="51" cy="59" r="1.5" fill="#fff"/>
+                        <circle cx="71" cy="59" r="1.5" fill="#fff"/>
+                    </svg>`,
+                gatomon: `
+                    <svg viewBox="0 0 120 120" class="w-full h-full">
+                        <polygon points="35,48 32,20 52,36" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+                        <polygon points="85,48 88,20 68,36" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+                        <circle cx="60" cy="60" r="28" fill="#ffffff" stroke="#94a3b8" stroke-width="2.5"/>
+                        <circle cx="50" cy="56" r="4.5" fill="#0284c7"/>
+                        <circle cx="70" cy="56" r="4.5" fill="#0284c7"/>
+                        <ellipse cx="60" cy="96" rx="14" ry="5" fill="none" stroke="#fbbf24" stroke-width="3.5"/>
+                    </svg>`,
+                tentomon: `
+                    <svg viewBox="0 0 120 120" class="w-full h-full">
+                        <ellipse cx="60" cy="65" rx="32" ry="28" fill="#ef4444" stroke="#991b1b" stroke-width="2.5"/>
+                        <line x1="60" y1="37" x2="60" y2="93" stroke="#7f1d1d" stroke-width="2.5"/>
+                        <circle cx="46" cy="62" r="4" fill="#1e293b"/>
+                        <circle cx="74" cy="62" r="4" fill="#1e293b"/>
+                        <circle cx="48" cy="78" r="3.5" fill="#1e293b"/>
+                        <circle cx="72" cy="78" r="3.5" fill="#1e293b"/>
+                        <ellipse cx="46" cy="44" rx="7" ry="5" fill="#34d399"/>
+                        <ellipse cx="74" cy="44" rx="7" ry="5" fill="#34d399"/>
+                        <path d="M50 37 L42 22 M70 37 L78 22" stroke="#f97316" stroke-width="2.5" stroke-linecap="round"/>
+                    </svg>`,
+                biyomon: `
+                    <svg viewBox="0 0 120 120" class="w-full h-full">
+                        <path d="M55 34 L60 16 L66 34" fill="#38bdf8" stroke="#0369a1" stroke-width="2"/>
+                        <circle cx="60" cy="58" r="26" fill="#f472b6" stroke="#be185d" stroke-width="2.5"/>
+                        <polygon points="54,62 66,62 60,74" fill="#fbbf24" stroke="#b45309" stroke-width="1.5"/>
+                        <circle cx="49" cy="54" r="3.5" fill="#2563eb"/>
+                        <circle cx="71" cy="54" r="3.5" fill="#2563eb"/>
+                        <rect x="36" y="84" width="12" height="6" rx="2" fill="#38bdf8"/>
+                    </svg>`,
+                palmon: `
+                    <svg viewBox="0 0 120 120" class="w-full h-full">
+                        <path d="M60 42 C42 20, 30 35, 52 46 C35 45, 38 62, 56 52 C52 68, 68 68, 64 52 C82 62, 85 45, 68 46 C90 35, 78 20, 60 42 Z" fill="#ec4899" stroke="#9d174d" stroke-width="2"/>
+                        <circle cx="60" cy="46" r="6" fill="#fef08a"/>
+                        <ellipse cx="60" cy="76" rx="24" ry="22" fill="#4ade80" stroke="#15803d" stroke-width="2.5"/>
+                        <circle cx="51" cy="72" r="3.5" fill="#1e293b"/>
+                        <circle cx="69" cy="72" r="3.5" fill="#1e293b"/>
+                    </svg>`,
+                gomamon: `
+                    <svg viewBox="0 0 120 120" class="w-full h-full">
+                        <path d="M46 38 L52 22 L60 35 L68 22 L74 38" fill="#f97316" stroke="#c2410c" stroke-width="2"/>
+                        <ellipse cx="60" cy="66" rx="30" ry="26" fill="#f8fafc" stroke="#64748b" stroke-width="2.5"/>
+                        <polygon points="44,50 52,54 44,58" fill="#a855f7"/>
+                        <polygon points="76,50 68,54 76,58" fill="#a855f7"/>
+                        <circle cx="50" cy="64" r="3.5" fill="#16a34a"/>
+                        <circle cx="70" cy="64" r="3.5" fill="#16a34a"/>
+                    </svg>`,
+                greymon: `
+                    <svg viewBox="0 0 120 120" class="w-full h-full">
+                        <circle cx="60" cy="60" r="52" fill="rgba(249,115,22,0.15)" stroke="#f97316" stroke-width="2"/>
+                        <path d="M32 76 L38 40 L60 28 L82 40 L88 76 Z" fill="#78350f" stroke="#451a03" stroke-width="2.5"/>
+                        <polygon points="38,44 18,24 44,34" fill="#fef3c7" stroke="#78350f" stroke-width="2"/>
+                        <polygon points="82,44 102,24 76,34" fill="#fef3c7" stroke="#78350f" stroke-width="2"/>
+                        <polygon points="60,34 54,14 66,14" fill="#fef3c7" stroke="#78350f" stroke-width="2"/>
+                        <path d="M42 74 L78 74 L72 94 L48 94 Z" fill="#f97316" stroke="#9a3412" stroke-width="2"/>
+                        <polygon points="46,56 55,60 46,62" fill="#38bdf8"/>
+                        <polygon points="74,56 65,60 74,62" fill="#38bdf8"/>
+                    </svg>`,
+                garurumon: `
+                    <svg viewBox="0 0 120 120" class="w-full h-full">
+                        <circle cx="60" cy="60" r="52" fill="rgba(56,189,248,0.15)" stroke="#38bdf8" stroke-width="2"/>
+                        <polygon points="34,48 26,18 50,36" fill="#f8fafc" stroke="#1d4ed8" stroke-width="2.5"/>
+                        <polygon points="86,48 94,18 70,36" fill="#f8fafc" stroke="#1d4ed8" stroke-width="2.5"/>
+                        <path d="M32 54 L60 32 L88 54 L78 88 L60 98 L42 88 Z" fill="#ffffff" stroke="#1e40af" stroke-width="2.5"/>
+                        <path d="M40 52 L54 58 M80 52 L66 58 M44 74 L56 70 M76 74 L64 70" stroke="#2563eb" stroke-width="3.5" stroke-linecap="round"/>
+                        <circle cx="48" cy="62" r="3.5" fill="#dc2626"/>
+                        <circle cx="72" cy="62" r="3.5" fill="#dc2626"/>
+                    </svg>`,
+                angemon: `
+                    <svg viewBox="0 0 120 120" class="w-full h-full">
+                        <circle cx="60" cy="60" r="52" fill="rgba(250,204,21,0.12)" stroke="#facc15" stroke-width="1.5"/>
+                        <path d="M45 60 C15 25, 8 55, 38 78 C20 82, 24 95, 46 82 Z" fill="#ffffff" stroke="#38bdf8" stroke-width="2"/>
+                        <path d="M75 60 C105 25, 112 55, 82 78 C100 82, 96 95, 74 82 Z" fill="#ffffff" stroke="#38bdf8" stroke-width="2"/>
+                        <rect x="52" y="34" width="16" height="58" rx="4" fill="#f8fafc" stroke="#0284c7" stroke-width="2"/>
+                        <path d="M52 38 L68 38 L68 48 L52 48 Z" fill="#94a3b8"/>
+                        <line x1="30" y1="96" x2="90" y2="24" stroke="#facc15" stroke-width="3.5" stroke-linecap="round"/>
+                    </svg>`,
+                metalgreymon: `
+                    <svg viewBox="0 0 120 120" class="w-full h-full">
+                        <circle cx="60" cy="60" r="52" fill="rgba(168,85,247,0.15)" stroke="#a855f7" stroke-width="2"/>
+                        <path d="M36 52 L14 26 L34 66 Z" fill="#9333ea" stroke="#581c87" stroke-width="2"/>
+                        <path d="M84 52 L106 26 L86 66 Z" fill="#9333ea" stroke="#581c87" stroke-width="2"/>
+                        <path d="M36 74 L42 36 L60 24 L78 36 L84 74 Z" fill="#cbd5e1" stroke="#334155" stroke-width="2.5"/>
+                        <polygon points="60,24 55,10 65,10" fill="#f8fafc" stroke="#475569" stroke-width="1.5"/>
+                        <rect x="44" y="74" width="32" height="22" rx="4" fill="#f97316" stroke="#9a3412" stroke-width="2"/>
+                        <circle cx="52" cy="84" r="4" fill="#ef4444"/>
+                        <circle cx="68" cy="84" r="4" fill="#ef4444"/>
+                    </svg>`,
+                weregarurumon: `
+                    <svg viewBox="0 0 120 120" class="w-full h-full">
+                        <circle cx="60" cy="60" r="52" fill="rgba(37,99,235,0.18)" stroke="#3b82f6" stroke-width="2"/>
+                        <polygon points="36,46 30,18 52,36" fill="#e2e8f0" stroke="#1e3a8a" stroke-width="2"/>
+                        <polygon points="84,46 90,18 68,36" fill="#e2e8f0" stroke="#1e3a8a" stroke-width="2"/>
+                        <path d="M38 50 L60 32 L82 50 L74 86 L46 86 Z" fill="#f8fafc" stroke="#1d4ed8" stroke-width="2.5"/>
+                        <path d="M42 56 L54 60 M78 56 L66 60" stroke="#2563eb" stroke-width="3"/>
+                        <path d="M26 74 L38 62 M24 82 L38 70 M94 74 L82 62 M96 82 L82 70" stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round"/>
+                    </svg>`,
+                holyangewomon: `
+                    <svg viewBox="0 0 120 120" class="w-full h-full">
+                        <circle cx="60" cy="60" r="52" fill="rgba(244,114,182,0.15)" stroke="#f472b6" stroke-width="2"/>
+                        <path d="M46 48 C14 18, 10 42, 42 58 C12 52, 12 72, 44 68 C16 74, 22 92, 46 78 Z" fill="#fff" stroke="#f472b6" stroke-width="1.8"/>
+                        <path d="M74 48 C106 18, 110 42, 78 58 C108 52, 108 72, 76 68 C104 74, 98 92, 74 78 Z" fill="#fff" stroke="#f472b6" stroke-width="1.8"/>
+                        <circle cx="60" cy="54" r="14" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+                        <path d="M46 48 L74 48 L70 38 L50 38 Z" fill="#e2e8f0" stroke="#64748b" stroke-width="1.5"/>
+                        <ellipse cx="60" cy="84" rx="16" ry="6" fill="none" stroke="#facc15" stroke-width="3"/>
+                    </svg>`,
+                wargreymon: `
+                    <svg viewBox="0 0 120 120" class="w-full h-full">
+                        <defs><linearGradient id="wgG" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#facc15"/><stop offset="100%" stop-color="#ea580c"/></linearGradient></defs>
+                        <circle cx="60" cy="60" r="54" fill="rgba(251,191,36,0.15)" stroke="#fbbf24" stroke-width="2"/>
+                        <path d="M36 44 L16 20 L38 68 Z" fill="#dc2626" stroke="#991b1b" stroke-width="2"/>
+                        <path d="M84 44 L104 20 L82 68 Z" fill="#dc2626" stroke="#991b1b" stroke-width="2"/>
+                        <circle cx="60" cy="62" r="26" fill="url(#wgG)" stroke="#b45309" stroke-width="2.5"/>
+                        <polygon points="44,44 30,22 52,38" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <polygon points="76,44 90,22 68,38" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+                        <path d="M52 58 L60 66 L68 58 M60 52 L60 72" stroke="#dc2626" stroke-width="3" stroke-linecap="round"/>
+                    </svg>`,
+                metalgarurumon: `
+                    <svg viewBox="0 0 120 120" class="w-full h-full">
+                        <circle cx="60" cy="60" r="54" fill="rgba(56,189,248,0.18)" stroke="#38bdf8" stroke-width="2"/>
+                        <path d="M36 48 L12 32 L34 68 Z" fill="#facc15" stroke="#ca8a04" stroke-width="2"/>
+                        <path d="M84 48 L108 32 L86 68 Z" fill="#facc15" stroke="#ca8a04" stroke-width="2"/>
+                        <polygon points="60,24 88,48 78,88 42,88 32,48" fill="#38bdf8" stroke="#0369a1" stroke-width="2.5"/>
+                        <polygon points="42,40 34,18 52,34" fill="#e2e8f0" stroke="#1e3a8a" stroke-width="2"/>
+                        <polygon points="78,40 86,18 68,34" fill="#e2e8f0" stroke="#1e3a8a" stroke-width="2"/>
+                        <polygon points="46,56 56,60 46,63" fill="#ef4444"/>
+                        <polygon points="74,56 64,60 74,63" fill="#ef4444"/>
+                    </svg>`,
+                omegamon: `
+                    <svg viewBox="0 0 120 120" class="w-full h-full">
+                        <circle cx="60" cy="60" r="55" fill="rgba(0,240,255,0.15)" stroke="#00f0ff" stroke-width="2"/>
+                        <path d="M30 85 L20 35 L60 22 L100 35 L90 85 Z" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+                        <polygon points="60,12 52,34 68,34" fill="#facc15" stroke="#b45309" stroke-width="1.5"/>
+                        <circle cx="32" cy="54" r="14" fill="#f97316" stroke="#9a3412" stroke-width="2"/>
+                        <line x1="12" y1="76" x2="32" y2="54" stroke="#00f0ff" stroke-width="4" stroke-linecap="round"/>
+                        <circle cx="88" cy="54" r="14" fill="#38bdf8" stroke="#0369a1" stroke-width="2"/>
+                        <circle cx="88" cy="54" r="6" fill="#0f172a"/>
+                        <polygon points="60,46 66,54 60,62 54,54" fill="#00f0ff"/>
+                    </svg>`,
+                imperialdramon: `
+                    <svg viewBox="0 0 120 120" class="w-full h-full">
+                        <circle cx="60" cy="60" r="54" fill="rgba(59,130,246,0.18)" stroke="#60a5fa" stroke-width="2"/>
+                        <path d="M40 50 L12 24 L36 74 Z" fill="#ef4444" stroke="#991b1b" stroke-width="2"/>
+                        <path d="M80 50 L108 24 L84 74 Z" fill="#ef4444" stroke="#991b1b" stroke-width="2"/>
+                        <polygon points="60,22 84,48 76,92 44,92 36,48" fill="#1e293b" stroke="#3b82f6" stroke-width="2.5"/>
+                        <polygon points="60,12 54,28 66,28" fill="#facc15"/>
+                        <circle cx="60" cy="66" r="11" fill="#facc15" stroke="#b45309" stroke-width="2"/>
+                        <circle cx="60" cy="66" r="5" fill="#00f0ff"/>
+                    </svg>`,
+                dukemon: `
+                    <svg viewBox="0 0 120 120" class="w-full h-full">
+                        <circle cx="60" cy="60" r="54" fill="rgba(239,68,68,0.15)" stroke="#ef4444" stroke-width="2"/>
+                        <path d="M26 88 L22 36 L60 22 L98 36 L94 88 Z" fill="#dc2626" stroke="#7f1d1d" stroke-width="2"/>
+                        <polygon points="60,24 80,46 72,82 48,82 40,46" fill="#f8fafc" stroke="#94a3b8" stroke-width="2.5"/>
+                        <polygon points="44,36 32,16 52,32" fill="#facc15"/>
+                        <polygon points="76,36 88,16 68,32" fill="#facc15"/>
+                        <polygon points="60,54 66,62 60,70 54,62" fill="#ef4444"/>
+                    </svg>`,
+                beelzemon: `
+                    <svg viewBox="0 0 120 120" class="w-full h-full">
+                        <circle cx="60" cy="60" r="54" fill="rgba(168,85,247,0.18)" stroke="#a855f7" stroke-width="2"/>
+                        <path d="M42 52 L14 26 L36 74 Z" fill="#1e293b" stroke="#6b21a8" stroke-width="2"/>
+                        <path d="M78 52 L106 26 L84 74 Z" fill="#1e293b" stroke="#6b21a8" stroke-width="2"/>
+                        <polygon points="60,26 82,50 74,88 46,88 38,50" fill="#0f172a" stroke="#a855f7" stroke-width="2.5"/>
+                        <circle cx="51" cy="52" r="3.5" fill="#ef4444"/>
+                        <circle cx="69" cy="52" r="3.5" fill="#ef4444"/>
+                        <circle cx="60" cy="40" r="3" fill="#ef4444"/>
+                        <path d="M46 70 L74 70" stroke="#94a3b8" stroke-width="3" stroke-dasharray="4 3"/>
+                    </svg>`,
+                alphamon: `
+                    <svg viewBox="0 0 120 120" class="w-full h-full">
+                        <circle cx="60" cy="60" r="54" fill="rgba(250,204,21,0.15)" stroke="#facc15" stroke-width="2"/>
+                        <polygon points="60,20 86,46 78,90 42,90 34,46" fill="#0f172a" stroke="#facc15" stroke-width="2.5"/>
+                        <polygon points="60,12 52,32 68,32" fill="#facc15"/>
+                        <path d="M44 46 L56 54 M76 46 L64 54" stroke="#facc15" stroke-width="3"/>
+                        <circle cx="60" cy="68" r="10" fill="none" stroke="#00f0ff" stroke-width="2.5"/>
+                        <polygon points="60,60 66,68 60,76 54,68" fill="#00f0ff"/>
+                    </svg>`,
+                lucemon: `
+                    <svg viewBox="0 0 120 120" class="w-full h-full">
+                        <circle cx="60" cy="60" r="54" fill="rgba(250,204,21,0.18)" stroke="#facc15" stroke-width="2"/>
+                        <path d="M44 46 L14 20 L38 56 L12 56 L40 70 L18 86 L46 78 Z" fill="#fff" stroke="#facc15" stroke-width="1.5"/>
+                        <path d="M76 46 L106 20 L82 56 L108 56 L80 70 L102 86 L74 78 Z" fill="#fff" stroke="#facc15" stroke-width="1.5"/>
+                        <circle cx="60" cy="56" r="18" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+                        <circle cx="53" cy="54" r="3" fill="#0284c7"/>
+                        <circle cx="67" cy="54" r="3" fill="#0284c7"/>
+                    </svg>`,
+                diaboromon: `
+                    <svg viewBox="0 0 120 120" class="w-full h-full">
+                        <circle cx="60" cy="60" r="54" fill="rgba(239,68,68,0.18)" stroke="#ef4444" stroke-width="2" stroke-dasharray="6 3"/>
+                        <polygon points="42,42 26,16 50,36" fill="#3b82f6" stroke="#1d4ed8" stroke-width="2"/>
+                        <polygon points="78,42 94,16 70,36" fill="#3b82f6" stroke="#1d4ed8" stroke-width="2"/>
+                        <polygon points="60,28 84,54 72,92 48,92 36,54" fill="#312e81" stroke="#ef4444" stroke-width="2.5"/>
+                        <circle cx="50" cy="54" r="4" fill="#facc15"/>
+                        <circle cx="70" cy="54" r="4" fill="#facc15"/>
+                        <path d="M46 72 L53 78 L60 72 L67 78 L74 72" fill="none" stroke="#ef4444" stroke-width="2.5"/>
+                    </svg>`,
+                blackwargreymon: `
+                    <svg viewBox="0 0 120 120" class="w-full h-full">
+                        <circle cx="60" cy="60" r="54" fill="rgba(239,68,68,0.18)" stroke="#ef4444" stroke-width="2"/>
+                        <path d="M36 44 L16 20 L38 68 Z" fill="#475569" stroke="#1e293b" stroke-width="2"/>
+                        <path d="M84 44 L104 20 L82 68 Z" fill="#475569" stroke="#1e293b" stroke-width="2"/>
+                        <circle cx="60" cy="62" r="26" fill="#0f172a" stroke="#ef4444" stroke-width="2.5"/>
+                        <polygon points="44,44 30,22 52,38" fill="#cbd5e1" stroke="#475569" stroke-width="2"/>
+                        <polygon points="76,44 90,22 68,38" fill="#cbd5e1" stroke="#475569" stroke-width="2"/>
+                        <polygon points="48,56 56,60 48,62" fill="#facc15"/>
+                        <polygon points="72,56 64,60 72,62" fill="#facc15"/>
+                    </svg>`
+            };
+            return svgs[artKey] || svgs.agumon;
+        }
+
+        // =========================================================================
+        // 2. COMPREHENSIVE DIGIMON DATABASE (25 DIGIMON)
+        // =========================================================================
+        const digimonDatabase = [
+            {
+                id: 1, no: "No.001", nameKo: "코로몬", nameEn: "KOROMON",
+                stage: "유년기", attribute: "데이터", type: "소형", field: "네이처 스피리츠",
+                artKey: "koromon",
+                desc: "몸 표면을 덮고 있던 솜털이 빠지고 몸집이 한층 커진 소형 디지몬. 더욱 활발하게 움직일 수 있게 되었지만, 여전히 싸울 힘은 약해 큰 입을 벌려 위협하는 것이 고작이다.",
+                stats: { hp: 30, atk: 28, def: 22, spd: 35, int: 25 },
+                skills: [
+                    { name: "거품 공격 (Bubble Blow)", desc: "입에서 산성 거품을 뿜어내어 상대를 위협하고 시야를 가리는 유년기 기본 기술." },
+                    { name: "몸통 박치기 (Tackle)", desc: "탄력 있는 몸을 튕겨 상대에게 돌진한다." }
+                ],
+                evoPrev: [], evoNext: [2]
+            },
+            {
+                id: 2, no: "No.002", nameKo: "아구몬", nameEn: "AGUMON",
+                stage: "성장기", attribute: "백신", type: "파충류형", field: "네이처 스피리츠",
+                artKey: "agumon",
+                desc: "성장하여 두 발로 걸어 다니게 된 소형 공룡 모습의 파충류형 디지몬. 아직 성장기라 힘은 약하지만 성격은 상당히 흉포하며 두려움을 모른다. 양손과 양발에는 단단하고 날카로운 손톱이 자라 전투에서도 위력을 발휘한다.",
+                stats: { hp: 52, atk: 58, def: 45, spd: 50, int: 42 },
+                skills: [
+                    { name: "꼬마 불꽃 (Baby Flame)", desc: "입에서 고열의 화염탄을 뿜어내어 적을 공격하는 필살기." },
+                    { name: "날카로운 발톱 (Surudoi Tsume)", desc: "양손의 단단한 발톱으로 적을 빠르게 할퀴어 베어버린다." }
+                ],
+                evoPrev: [1], evoNext: [10]
+            },
+            {
+                id: 3, no: "No.003", nameKo: "파피몬", nameEn: "GABUMON",
+                stage: "성장기", attribute: "데이터", type: "파충류형", field: "네이처 스피리츠",
+                artKey: "gabumon",
+                desc: "가루몬의 데이터 모피를 뒤집어쓰고 있지만 본모습은 파충류형 디지몬. 극도로 수줍음이 많고 겁이 많은 성격이라 가루몬이 남긴 데이터를 모피로 만들어 뒤집어씀으로써 자신을 보호하고 있다. 모피를 쓰면 성격이 180도 변한다.",
+                stats: { hp: 50, atk: 54, def: 52, spd: 55, int: 48 },
+                skills: [
+                    { name: "쁘띠 파이어 (Petit Fire)", desc: "입에서 푸른색의 영혼 불꽃을 뿜어내어 공격한다." },
+                    { name: "뿔 공격 (Horn Attack)", desc: "이마에 돋아난 단단한 외뿔로 적을 들이받는다." }
+                ],
+                evoPrev: [], evoNext: [11]
+            },
+            {
+                id: 4, no: "No.004", nameKo: "파닥몬", nameEn: "PATAMON",
+                stage: "성장기", attribute: "데이터", type: "포유류형", field: "윈드 가디언즈",
+                artKey: "patamon",
+                desc: "커다란 귀가 특징인 포유류형 디지몬. 이 큰 귀를 날개처럼 사용해 하늘을 날 수 있지만, 시속 1km 정도밖에 나오지 않아 걷는 편이 훨씬 빠르다. 호기심이 왕성하고 순수하며 신성 계열의 잠재력을 숨기고 있다.",
+                stats: { hp: 46, atk: 45, def: 44, spd: 52, int: 56 },
+                skills: [
+                    { name: "공기팡 (Air Shot)", desc: "공기를 한껏 들이마신 뒤 한 번에 압축된 공기탄을 발사한다." },
+                    { name: "날개 싸다귀 (Hane Binta)", desc: "커다란 귀로 상대를 연속으로 때린다." }
+                ],
+                evoPrev: [], evoNext: [12]
+            },
+            {
+                id: 5, no: "No.005", nameKo: "가트몬", nameEn: "TAILMON",
+                stage: "성숙기", attribute: "백신", type: "성수형", field: "네이처 스피리츠",
+                artKey: "gatomon",
+                desc: "호기심이 왕성하고 장난을 좋아하는 성수형 디지몬. 몸집은 성장기 수준으로 작지만 엄연한 성숙기 디지몬이며, 꼬리에 끼고 있는 '홀리 링(신성한 반지)'에서 뿜어져 나오는 성스러운 힘으로 상상을 초월하는 전투력을 발휘한다.",
+                stats: { hp: 62, atk: 68, def: 64, spd: 76, int: 72 },
+                skills: [
+                    { name: "고양이 펀치 (Neko Punch)", desc: "세이버레오몬의 데이터를 복제한 긴 발톱으로 강력한 일격을 날린다." },
+                    { name: "캐츠 아이 (Cat's Eye)", desc: "날카로운 눈빛으로 적을 노려보아 움직임을 봉쇄하고 혼란시킨다." }
+                ],
+                evoPrev: [], evoNext: [15]
+            },
+            {
+                id: 6, no: "No.006", nameKo: "텐타몬", nameEn: "TENTOMON",
+                stage: "성장기", attribute: "백신", type: "곤충형", field: "네이처 스피리츠",
+                artKey: "tentomon",
+                desc: "딱딱한 껍질을 가졌지만 아직 공격성이 낮은 곤충형 디지몬의 초기 형태. 앞다리에 각각 1개, 중다리에 4개의 발톱을 가지고 있다. 자연을 사랑하고 온화한 성격으로, 꽃의 향기를 맡으며 낮잠 자는 것을 좋아한다.",
+                stats: { hp: 48, atk: 47, def: 56, spd: 54, int: 62 },
+                skills: [
+                    { name: "꼬마 번개 (Petit Thunder)", desc: "날개를 비벼 발생시킨 정전기를 증폭해 전격탄을 발사한다." },
+                    { name: "더블 클로 (Double Claw)", desc: "날카로운 앞다리 발톱으로 상대를 할퀸다." }
+                ],
+                evoPrev: [], evoNext: []
+            },
+            {
+                id: 7, no: "No.007", nameKo: "피요몬", nameEn: "PIYOMON",
+                stage: "성장기", attribute: "백신", type: "조류형", field: "윈드 가디언즈",
+                artKey: "biyomon",
+                desc: "날개 부분이 팔처럼 발달한 병아리형 디지몬. 날개로 물건을 능숙하게 잡을 수 있지만 하늘을 나는 것은 서툴러 평소에는 땅 위에서 생활한다. 호기심이 많고 사람의 뒤를 졸졸 따라다니는 붙임성 좋은 성격을 지녔다.",
+                stats: { hp: 47, atk: 49, def: 43, spd: 58, int: 51 },
+                skills: [
+                    { name: "매지컬 파이어 (Magical Fire)", desc: "환영처럼 일렁이는 푸른 도깨비불을 날려 적을 태운다." },
+                    { name: "피요 킥 (Piyo Kick)", desc: "점프하여 날카로운 발톱으로 차올린다." }
+                ],
+                evoPrev: [], evoNext: []
+            },
+            {
+                id: 8, no: "No.008", nameKo: "팔몬", nameEn: "PALMON",
+                stage: "성장기", attribute: "데이터", type: "식물형", field: "정글 트루퍼스",
+                artKey: "palmon",
+                desc: "머리에 열대 꽃이 피어 있는 식물형 디지몬. 파충류형에서 진화했으나 외형과 특성은 완전히 식물로 분류된다. 낮에는 꽃과 잎을 펼쳐 광합성을 하고, 평소에는 뿌리 모양의 발을 땅속에 묻어 영양분을 흡수한다.",
+                stats: { hp: 50, atk: 48, def: 49, spd: 46, int: 54 },
+                skills: [
+                    { name: "독담쟁이 (Poison Ivy)", desc: "강한 독성을 지닌 덩굴을 뻗어 적을 휘감고 마비시킨다." },
+                    { name: "냄새 펀치 (Kusai Punch)", desc: "기절할 정도의 악취를 풍기며 펀치를 날린다." }
+                ],
+                evoPrev: [], evoNext: []
+            },
+            {
+                id: 9, no: "No.009", nameKo: "쉬라몬", nameEn: "GOMAMON",
+                stage: "성장기", attribute: "백신", type: "해수형", field: "딥 세이버즈",
+                artKey: "gomamon",
+                desc: "육지에서도 활동할 수 있게 된 해수형 디지몬. 온몸을 덮고 있는 따뜻한 털은 성장함에 따라 길어지며, 머리에서 등까지 이어진 붉은 털은 쉬라몬의 감정에 따라 움직인다. 장난기가 넘치는 호기심 대장이다.",
+                stats: { hp: 54, atk: 50, def: 51, spd: 53, int: 49 },
+                skills: [
+                    { name: "물고기 떼 행진 (Marching Fishes)", desc: "작은 물고기 군단을 소환하여 적에게 일제히 돌격시킨다." },
+                    { name: "서퍼 테일 (Surfer Tail)", desc: "강인한 꼬리로 수면을 내리쳐 거대한 물보라를 일으킨다." }
+                ],
+                evoPrev: [], evoNext: []
+            },
+            {
+                id: 10, no: "No.010", nameKo: "그레이몬", nameEn: "GREYMON",
+                stage: "성숙기", attribute: "백신", type: "공룡형", field: "네이처 스피리츠",
+                artKey: "greymon",
+                desc: "머리 피부가 딱딱해져 장수풍뎅이 같은 단단한 껍질로 덮인 공룡형 디지몬. 매우 공격적인 성격으로 온몸이 흉기라 불릴 만큼 강력한 힘을 지녔으나, 지성이 높아 길들여지면 이보다 믿음직한 파트너가 없다.",
+                stats: { hp: 74, atk: 78, def: 70, spd: 62, int: 58 },
+                skills: [
+                    { name: "메가 파이어 (Mega Flame)", desc: "입에서 초고열의 거대한 화염탄을 발사해 모든 것을 불태운다." },
+                    { name: "그레이트 혼 (Great Antler)", desc: "강철처럼 단단한 3개의 뿔로 적을 꿰뚫어 날려버린다." }
+                ],
+                evoPrev: [2], evoNext: [13]
+            },
+            {
+                id: 11, no: "No.011", nameKo: "가루몬", nameEn: "GARURUMON",
+                stage: "성숙기", attribute: "백신", type: "짐승형", field: "네이처 스피리츠",
+                artKey: "garurumon",
+                desc: "푸른빛과 은빛이 감도는 모피를 가진 늑대 모습의 짐승형 디지몬. 그 체모는 전설의 희귀 금속 '미스릴'만큼 단단하며, 어깨에서 돋아난 칼날은 닿는 모든 것을 베어버린다. 주인에게 절대적인 충성심을 보인다.",
+                stats: { hp: 70, atk: 75, def: 68, spd: 80, int: 64 },
+                skills: [
+                    { name: "폭스 파이어 (Fox Fire)", desc: "입에서 푸른 고열의 화염을 맹렬하게 뿜어내는 필살기." },
+                    { name: "슬램 어택 (Slamming Attack)", desc: "빠른 속도로 도약하여 전신의 힘으로 적을 덮친다." }
+                ],
+                evoPrev: [3], evoNext: [14]
+            },
+            {
+                id: 12, no: "No.012", nameKo: "엔젤몬", nameEn: "ANGEMON",
+                stage: "성숙기", attribute: "백신", type: "천사형", field: "바이러스 버스터즈",
+                artKey: "angemon",
+                desc: "빛나는 6장의 날개를 가진 순백의 의상을 입은 천사형 디지몬. 완벽한 선의 존재로 디지털 월드를 행복으로 이끄는 사명을 띠고 있으며, 악에 대해서는 끝까지 용서하지 않고 성스러운 힘으로 심판한다.",
+                stats: { hp: 72, atk: 76, def: 70, spd: 78, int: 82 },
+                skills: [
+                    { name: "천국의 주먹 (Heaven's Knuckle)", desc: "황금빛으로 빛나는 주먹에서 신성한 빛의 광선을 발사해 악을 정화한다." },
+                    { name: "홀리 로드 (Holy Rod)", desc: "성스러운 지팡이를 휘둘러 어둠의 기운을 튕겨낸다." }
+                ],
+                evoPrev: [4], evoNext: []
+            },
+            {
+                id: 13, no: "No.013", nameKo: "메탈그레이몬", nameEn: "METALGREYMON",
+                stage: "완전체", attribute: "백신", type: "사이보그형", field: "메탈 엠파이어",
+                artKey: "metalgreymon",
+                desc: "몸의 절반 이상을 기계화하여 파워업한 사이보그형 디지몬. 파일섬의 메탈그레이몬은 개조로 인해 생명을 오래 유지하지 못했으나, 이 개체는 완벽한 진화에 성공해 강대한 파워를 끌어냈다. 왼팔의 트라이던트 암은 크롬디지조이드 제질이다.",
+                stats: { hp: 85, atk: 88, def: 84, spd: 74, int: 72 },
+                skills: [
+                    { name: "기가 디스트로이어 (Giga Destroyer)", desc: "가슴의 해치에서 핵탄두급 위력을 지닌 유기체 미사일 2발을 발사한다." },
+                    { name: "트라이던트 암 (Trident Arm)", desc: "와이어가 달린 강철 왼팔을 사출하여 원거리의 적을 꿰뚫는다." }
+                ],
+                evoPrev: [10], evoNext: [16]
+            },
+            {
+                id: 14, no: "No.014", nameKo: "워가루몬", nameEn: "WEREGARURUMON",
+                stage: "완전체", attribute: "백신", type: "수인형", field: "네이처 스피리츠",
+                artKey: "weregarurumon",
+                desc: "가루몬이 진화하여 두 발로 서서 걸을 수 있게 된 수인형 디지몬. 이족 보행을 통해 스피드는 약간 줄어들었지만, 대신 강력한 각력과 격투 능력을 얻어 지략과 무술을 겸비한 전사로 거듭났다.",
+                stats: { hp: 80, atk: 85, def: 78, spd: 89, int: 78 },
+                skills: [
+                    { name: "카이저 네일 (Kaiser Nail)", desc: "양손의 날카로운 갈고리 발톱으로 적을 순식간에 난도질한다." },
+                    { name: "가루루 킥 (Garuru Kick)", desc: "경이로운 점프력에서 뿜어져 나오는 파괴적인 돌려차기." }
+                ],
+                evoPrev: [11], evoNext: [17]
+            },
+            {
+                id: 15, no: "No.015", nameKo: "엔젤우몬", nameEn: "ANGEWOMON",
+                stage: "완전체", attribute: "백신", type: "대천사형", field: "바이러스 버스터즈",
+                artKey: "holyangewomon",
+                desc: "아름다운 여성의 모습을 한 대천사형 디지몬. 8장의 빛나는 날개를 지녔으며 디지털 월드의 여신과도 같은 존재로 숭배받는다. 성격은 매우 온화하지만 악과 불의를 결코 용납하지 않는 강인함을 지녔다.",
+                stats: { hp: 82, atk: 84, def: 80, spd: 86, int: 90 },
+                skills: [
+                    { name: "홀리 애로우 (Holy Arrow)", desc: "번개처럼 강력한 신성한 빛의 화살을 쏘아 악의 데이터를 소멸시킨다." },
+                    { name: "헤븐즈 참 (Heaven's Charm)", desc: "신성한 빛의 십자가를 그려 적의 악한 힘을 정화한다." }
+                ],
+                evoPrev: [5], evoNext: []
+            },
+            {
+                id: 16, no: "No.016", nameKo: "워그레이몬", nameEn: "WARGREYMON",
+                stage: "궁극체", attribute: "백신", type: "용인형", field: "메탈 엠파이어",
+                artKey: "wargreymon",
+                desc: "최강의 금속 '크롬디지조이드' 갑옷을 입은 그레이몬 계열의 궁극 형태. 거대했던 몸집이 인간형으로 압축되면서 스피드와 파워가 비약적으로 상승했다. 양팔에 장착된 '드라몬 킬러'는 드래곤 계열 디지몬에게 절대적인 위협이다.",
+                stats: { hp: 94, atk: 96, def: 92, spd: 90, int: 86 },
+                skills: [
+                    { name: "테라 광선 (Gaia Force)", desc: "대기 중에 존재하는 모든 에너지를 한 점에 모아 초고밀도 에너지탄으로 투척한다." },
+                    { name: "브레이브 토네이도 (Brave Tornado)", desc: "몸을 고속으로 회전시켜 회오리바람처럼 적을 꿰뚫는 돌격기." }
+                ],
+                evoPrev: [13], evoNext: [18]
+            },
+            {
+                id: 17, no: "No.017", nameKo: "메탈가루몬", nameEn: "METALGARURUMON",
+                stage: "궁극체", attribute: "데이터", type: "사이보그형", field: "메탈 엠파이어",
+                artKey: "metalgarurumon",
+                desc: "전신의 거의 모든 부위를 기계화하여 파워업한 가루몬의 최종 형태. 기계화되면서도 본래의 민첩성을 전혀 잃지 않았으며, 전신에 숨겨진 무수한 중화기와 미사일로 적을 분쇄한다. 4개의 레이저 사이트로 어둠 속에서도 적을 포착한다.",
+                stats: { hp: 92, atk: 94, def: 90, spd: 96, int: 88 },
+                skills: [
+                    { name: "코큐토스 브레스 (Cocytus Breath)", desc: "모든 것을 절대영도로 얼려버리는 최강의 냉기 탄환을 발사한다." },
+                    { name: "가루루 토마호크 (Garuru Tomahawk)", desc: "가슴 해치에서 고성능 유도 미사일을 일제 사격한다." }
+                ],
+                evoPrev: [14], evoNext: [18]
+            },
+            {
+                id: 18, no: "No.018", nameKo: "오메가몬", nameEn: "OMEGAMON",
+                stage: "초궁극체", attribute: "백신", type: "성기사형", field: "바이러스 버스터즈",
+                artKey: "omegamon",
+                desc: "바이러스 버스터즈인 워그레이몬과 메탈가루몬이 선을 바라는 사람들의 강한 의지에 의해 융합하여 탄생한 성기사형 디지몬. 두 디지몬의 특성을 모두 겸비한 멀티 타입의 전사로, 로얄 나이츠의 일원이다.",
+                stats: { hp: 99, atk: 100, def: 97, spd: 98, int: 96 },
+                skills: [
+                    { name: "그레이 소드 (Grey Sword)", desc: "왼팔의 워그레이몬 형태에서 뿜어져 나오는 무적의 검으로 적을 일도양단한다." },
+                    { name: "가루루 캐논 (Garuru Cannon)", desc: "오른팔의 메탈가루몬 형태에서 절대영도의 냉기탄을 연사한다." }
+                ],
+                evoPrev: [16, 17], evoNext: []
+            },
+            {
+                id: 19, no: "No.019", nameKo: "황제드라몬", nameEn: "IMPERIALDRAMON",
+                stage: "궁극체", attribute: "프리", type: "고대용형", field: "드래곤즈 로어",
+                artKey: "imperialdramon",
+                desc: "고대 디지털 월드에 군림했던 궁극의 고대용형 디지몬. 다른 디지몬들과는 격이 다른 존재감과 능력을 지녔으며, 지성을 갖추어 모든 힘을 해방한 '파이터 모드'로 형태를 전환할 수 있다.",
+                stats: { hp: 96, atk: 97, def: 94, spd: 93, int: 90 },
+                skills: [
+                    { name: "메가 데스 (Mega Death)", desc: "입에서 암흑 물질을 발사해 반경 수백 미터의 모든 것을 소멸시킨다." },
+                    { name: "포지트론 레이저 (Positron Laser)", desc: "등에 장착된 거대 포신에서 초고출력 양전자 포를 발사한다." }
+                ],
+                evoPrev: [], evoNext: []
+            },
+            {
+                id: 20, no: "No.020", nameKo: "듀크몬", nameEn: "DUKEMON",
+                stage: "궁극체", attribute: "바이러스", type: "성기사형", field: "바이러스 버스터즈",
+                artKey: "dukemon",
+                desc: "로얄 나이츠의 일원인 성기사형 디지몬. 바이러스 속성이면서도 질서의 수호자로 군림하는 모순된 존재로, 밸런스가 무너지면 파괴의 화신으로 돌변할 위험을 품고 있다. 99.9% 순도의 크롬디지조이드 성갑옷을 걸치고 있다.",
+                stats: { hp: 96, atk: 98, def: 96, spd: 94, int: 92 },
+                skills: [
+                    { name: "로얄 세이버 (Royal Saber)", desc: "성창 그람으로 강력한 일격을 날려 적을 꿰뚫는다." },
+                    { name: "파이널 엘리시온 (Final Elysion)", desc: "성순 이지스에서 모든 것을 정화하는 거대한 빛의 빔을 발사한다." }
+                ],
+                evoPrev: [], evoNext: []
+            },
+            {
+                id: 21, no: "No.021", nameKo: "베르제브몬", nameEn: "BEELZEMON",
+                stage: "궁극체", attribute: "바이러스", type: "마왕형", field: "나이트메어 솔저스",
+                artKey: "beelzemon",
+                desc: "수많은 악마형 디지몬을 통솔하는 7대 마왕 중 '폭식'을 관장하는 마왕형 디지몬. 고독을 사랑하며 절대 타인과 무리 짓지 않는 냉혹한 승부사지만, 약자를 괴롭히는 비열한 짓은 싫어하는 긍지를 지녔다.",
+                stats: { hp: 93, atk: 98, def: 88, spd: 97, int: 91 },
+                skills: [
+                    { name: "더블 임팩트 (Double Impact)", desc: "애용하는 2정의 샷건 '베렌헤나'를 초고속으로 연사한다." },
+                    { name: "다크니스 클로 (Darkness Claw)", desc: "예리한 손톱을 치켜들고 적을 단숨에 베어 가른다." }
+                ],
+                evoPrev: [], evoNext: []
+            },
+            {
+                id: 22, no: "No.022", nameKo: "알파몬", nameEn: "ALPHAMON",
+                stage: "궁극체", attribute: "백신", type: "성기사형", field: "바이러스 버스터즈",
+                artKey: "alphamon",
+                desc: "13체의 성기사 '로얄 나이츠' 중 한 명이지만, 평소에는 모습을 드러내지 않아 '고고한 은둔자'로 불리는 억지력적 존재. 전투 시 지나간 시간을 순식간에 되감아 공격을 반복하는 궁극의 힘 '알파 인포스'를 지녔다.",
+                stats: { hp: 98, atk: 99, def: 98, spd: 99, int: 98 },
+                skills: [
+                    { name: "디지타라이즈 오브 소울", desc: "디지털 몬스터 문자가 새겨진 마법진을 전개해 이차원의 소환수를 부른다." },
+                    { name: "성검 그레이달파 (Seiken Gradalpha)", desc: "마법진의 중심에서 빛의 성검을 뽑아 적을 일격에 베어 넘긴다." }
+                ],
+                evoPrev: [], evoNext: []
+            },
+            {
+                id: 23, no: "No.023", nameKo: "루체몬", nameEn: "LUCEMON",
+                stage: "성장기", attribute: "백신", type: "천사형", field: "바이러스 버스터즈",
+                artKey: "lucemon",
+                desc: "아득한 고대 디지털 월드에 강림한 어린아이 모습의 천사형 디지몬. 12장의 날개를 지녔으며 성장기임에도 불구하고 일반 궁극체를 아득히 능가하는 압도적인 지혜와 마력을 보유하고 있다.",
+                stats: { hp: 88, atk: 92, def: 86, spd: 90, int: 99 },
+                skills: [
+                    { name: "그랜드 크로스 (Grand Cross)", desc: "10개의 초고열 광구를 십자 형태로 배열해 발사하는 필살기." },
+                    { name: "디바인 피트 (Divine Feat)", desc: "빛의 검을 생성하여 적을 관통한다." }
+                ],
+                evoPrev: [], evoNext: []
+            },
+            {
+                id: 24, no: "No.024", nameKo: "디아블로몬", nameEn: "DIABOROMON",
+                stage: "궁극체", attribute: "불명", type: "종족불명", field: "나이트메어 솔저스",
+                artKey: "diaboromon",
+                desc: "네트워크상의 온갖 데이터를 흡수하여 진화와 거대화를 반복한 정체불명의 궁극체. 네트워크 세계를 파괴하기 위해 행동하며 자기 복제를 통해 수만 체로 증식하는 공포의 존재다.",
+                stats: { hp: 95, atk: 97, def: 90, spd: 98, int: 95 },
+                skills: [
+                    { name: "카타스트로피 캐논 (Catastrophe Cannon)", desc: "가슴의 포구에서 파괴 에너지를 응축해 발사한다." },
+                    { name: "케이블 크러셔 (Cable Crusher)", desc: "신축자재로 늘어나는 팔을 뻗어 적을 짓눌러 버린다." }
+                ],
+                evoPrev: [], evoNext: []
+            },
+            {
+                id: 25, no: "No.025", nameKo: "블랙워그레이몬", nameEn: "BLACKWARGREYMON",
+                stage: "궁극체", attribute: "바이러스", type: "용인형", field: "메탈 엠파이어",
+                artKey: "blackwargreymon",
+                desc: "'칠흑의 용전사'라 불리며 두려움의 대상이 된 바이러스 속성의 워그레이몬. 정의를 위해서가 아닌 자신의 존재 의의를 찾기 위해 싸우며, 비겁한 수단을 혐오하는 무인 기질을 지녔다.",
+                stats: { hp: 95, atk: 97, def: 92, spd: 90, int: 87 },
+                skills: [
+                    { name: "암흑의 테라 광선 (Black Gaia Force)", desc: "세계에 존재하는 모든 '부(負)의 염원'을 한 점에 모아 발사한다." },
+                    { name: "블랙 토네이도 (Black Tornado)", desc: "칠흑의 회오리를 일으키며 적진으로 돌격한다." }
+                ],
+                evoPrev: [], evoNext: []
+            }
+        ];
+
+        // =========================================================================
+        // 3. STATE & LOCALSTORAGE INITIALIZATION
+        // =========================================================================
+        const FAV_STORAGE_KEY = 'digimon_encyclopedia_favorites_v1';
+        let favorites = new Set(JSON.parse(localStorage.getItem(FAV_STORAGE_KEY) || '[]'));
+        let currentAttrFilter = 'ALL';
+        let currentStageFilter = 'ALL';
+        let showFavoritesOnly = false;
+        let currentModalDigimonId = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCounters();
+            renderGrid();
+
+            const searchInput = document.getElementById('searchInput');
+            const clearBtn = document.getElementById('clearSearchBtn');
+            searchInput.addEventListener('input', () => {
+                clearBtn.classList.toggle('hidden', searchInput.value.trim() === '');
+                renderGrid();
+            });
+        });
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').textContent = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 2200);
+        }
+
+        function updateCounters() {
+            document.getElementById('totalCountDisplay').innerHTML = `${digimonDatabase.length} <span class="text-xs font-sans font-normal text-slate-400">종</span>`;
+            document.getElementById('favCountDisplay').innerHTML = `${favorites.size} <span class="text-xs font-sans font-normal text-slate-400">체</span>`;
+        }
+
+        // =========================================================================
+        // 4. FILTERING, SORTING & GRID RENDERING
+        // =========================================================================
+        function setAttrFilter(attr) {
+            currentAttrFilter = attr;
+            document.querySelectorAll('.attr-btn').forEach(btn => {
+                const isSelected = btn.dataset.attr === attr;
+                if (isSelected) {
+                    btn.className = 'attr-btn active px-2.5 py-1.5 rounded-lg text-xs font-bold bg-cyan-500 text-slate-950 shadow-neon-cyan transition-all';
+                } else {
+                    const colorMap = { '백신': 'text-sky-400', '데이터': 'text-emerald-400', '바이러스': 'text-rose-400', '프리': 'text-purple-400', 'ALL': 'text-slate-300' };
+                    btn.className = `attr-btn px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-digi-card border border-digi-border ${colorMap[btn.dataset.attr] || 'text-slate-300'} hover:border-cyan-400 transition-all`;
+                }
+            });
+            renderGrid();
+        }
+
+        function setStageFilter(stage) {
+            currentStageFilter = stage;
+            document.querySelectorAll('.stage-btn').forEach(btn => {
+                const isSelected = btn.dataset.stage === stage;
+                if (isSelected) {
+                    btn.className = 'stage-btn active px-3 py-1 rounded-lg text-xs font-bold bg-digi-orange text-white shadow-neon-orange transition-all';
+                } else {
+                    btn.className = 'stage-btn px-3 py-1 rounded-lg text-xs font-medium bg-digi-bg border border-digi-border text-slate-300 hover:border-digi-orange transition-all';
+                }
+            });
+            renderGrid();
+        }
+
+        function toggleFavoriteOnly() {
+            showFavoritesOnly = !showFavoritesOnly;
+            const btn = document.getElementById('favFilterBtn');
+            const icon = document.getElementById('favFilterIcon');
+            if (showFavoritesOnly) {
+                btn.classList.add('border-amber-400', 'bg-amber-500/20', 'text-amber-300');
+                icon.className = 'fa-solid fa-star text-amber-400';
+            } else {
+                btn.classList.remove('border-amber-400', 'bg-amber-500/20', 'text-amber-300');
+                icon.className = 'fa-regular fa-star text-amber-400';
+            }
+            renderGrid();
+        }
+
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('clearSearchBtn').classList.add('hidden');
+            renderGrid();
+        }
+
+        function resetAllFilters() {
+            clearSearch();
+            setAttrFilter('ALL');
+            setStageFilter('ALL');
+            if (showFavoritesOnly) toggleFavoriteOnly();
+        }
+
+        function getTotalPower(stats) {
+            return stats.hp + stats.atk + stats.def + stats.spd + stats.int;
+        }
+
+        function getAttributeBadgeStyle(attr) {
+            switch (attr) {
+                case '백신': return 'bg-sky-500/15 text-sky-400 border-sky-500/40';
+                case '데이터': return 'bg-emerald-500/15 text-emerald-400 border-emerald-500/40';
+                case '바이러스': return 'bg-rose-500/15 text-rose-400 border-rose-500/40';
+                case '프리': return 'bg-purple-500/15 text-purple-400 border-purple-500/40';
+                default: return 'bg-slate-500/20 text-slate-300 border-slate-500/40';
+            }
+        }
+
+        function renderGrid() {
+            const query = document.getElementById('searchInput').value.trim().toLowerCase();
+            const sortBy = document.getElementById('sortSelect').value;
+            const grid = document.getElementById('digimonGrid');
+            const emptyState = document.getElementById('emptyState');
+
+            let filtered = digimonDatabase.filter(d => {
+                const matchesAttr = currentAttrFilter === 'ALL' || d.attribute === currentAttrFilter;
+                const matchesStage = currentStageFilter === 'ALL' || d.stage === currentStageFilter;
+                const matchesFav = !showFavoritesOnly || favorites.has(d.id);
+                const matchesQuery = query === '' ||
+                    d.nameKo.toLowerCase().includes(query) ||
+                    d.nameEn.toLowerCase().includes(query) ||
+                    d.type.toLowerCase().includes(query) ||
+                    d.field.toLowerCase().includes(query) ||
+                    d.skills.some(s => s.name.toLowerCase().includes(query));
+                return matchesAttr && matchesStage && matchesFav && matchesQuery;
+            });
+
+            // Sorting
+            filtered.sort((a, b) => {
+                if (sortBy === 'name') return a.nameKo.localeCompare(b.nameKo, 'ko');
+                if (sortBy === 'power') return getTotalPower(b.stats) - getTotalPower(a.stats);
+                return a.id - b.id;
+            });
+
+            document.getElementById('filteredCountText').textContent = filtered.length;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+            emptyState.classList.add('hidden');
+
+            grid.innerHTML = filtered.map(d => {
+                const isFav = favorites.has(d.id);
+                const totalPower = getTotalPower(d.stats);
+                const attrStyle = getAttributeBadgeStyle(d.attribute);
+
+                return `
+                <article onclick="openDetailModal(${d.id})" class="digimon-card tech-corner cursor-pointer bg-digi-card/95 border border-digi-border rounded-xl p-4 flex flex-col justify-between relative group">
+                    <!-- Top Header: No & Favorite -->
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="font-cyber text-xs font-bold text-cyan-400/90 tracking-wider">${d.no}</span>
+                        <button onclick="event.stopPropagation(); toggleFavorite(${d.id})" class="w-7 h-7 rounded-lg bg-digi-bg/80 hover:bg-slate-800 border border-slate-700/80 flex items-center justify-center transition-colors" title="파트너 등록">
+                            <i class="${isFav ? 'fa-solid text-amber-400' : 'fa-regular text-slate-500 hover:text-amber-400'} fa-star text-xs"></i>
+                        </button>
+                    </div>
+
+                    <!-- Artwork Area -->
+                    <div class="relative my-1 py-3 rounded-xl bg-digi-bg/90 border border-slate-800/90 group-hover:border-cyan-500/40 holo-scan flex items-center justify-center transition-colors">
+                        <div class="w-28 h-28 transform group-hover:scale-105 transition-transform duration-300">
+                            ${getDigimonSVG(d.artKey)}
+                        </div>
+                        <span class="absolute bottom-2 right-2.5 text-[10px] font-mono text-slate-400 bg-slate-900/90 px-1.5 py-0.5 rounded border border-slate-800">
+                            PWR <strong class="text-cyan-400">${totalPower}</strong>
+                        </span>
+                    </div>
+
+                    <!-- Digimon Name & Classification -->
+                    <div class="mt-3">
+                        <div class="flex items-center gap-1.5 mb-1">
+                            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-digi-orange/20 text-digi-orange border border-digi-orange/30">${d.stage}</span>
+                            <span class="px-2 py-0.5 rounded text-[10px] font-bold border ${attrStyle}">${d.attribute}</span>
+                        </div>
+                        <h3 class="text-base font-bold text-white group-hover:text-cyan-300 transition-colors">${d.nameKo}</h3>
+                        <p class="font-cyber text-[10px] text-slate-400 tracking-wider uppercase">${d.nameEn} · <span class="font-sans text-slate-400">${d.type}</span></p>
+                    </div>
+
+                    <!-- Mini Signature Skill Footer -->
+                    <div class="mt-3 pt-2.5 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400">
+                        <span class="truncate max-w-[180px]"><i class="fa-solid fa-bolt text-digi-orange mr-1"></i>${d.skills[0].name.split('(')[0]}</span>
+                        <span class="text-cyan-400 font-mono text-[10px] group-hover:translate-x-0.5 transition-transform">ANALYZE &rarr;</span>
+                    </div>
+                </article>`;
+            }).join('');
+        }
+
+        // =========================================================================
+        // 5. FAVORITES MANAGEMENT
+        // =========================================================================
+        function toggleFavorite(id) {
+            const digimon = digimonDatabase.find(d => d.id === id);
+            if (favorites.has(id)) {
+                favorites.delete(id);
+                showToast(`${digimon.nameKo} 파트너 등록이 해제되었습니다.`);
+            } else {
+                favorites.add(id);
+                showToast(`${digimon.nameKo}이(가) 파트너 디지몬으로 등록되었습니다!`);
+            }
+            localStorage.setItem(FAV_STORAGE_KEY, JSON.stringify([...favorites]));
+            updateCounters();
+            renderGrid();
+            if (currentModalDigimonId === id) {
+                updateModalFavButton(id);
+            }
+        }
+
+        function toggleModalFavorite() {
+            if (currentModalDigimonId !== null) {
+                toggleFavorite(currentModalDigimonId);
+            }
+        }
+
+        function updateModalFavButton(id) {
+            const isFav = favorites.has(id);
+            const icon = document.getElementById('modalFavIcon');
+            const text = document.getElementById('modalFavText');
+            const btn = document.getElementById('modalFavBtn');
+
+            if (isFav) {
+                icon.className = 'fa-solid fa-star text-amber-400';
+                text.textContent = '파트너 등록됨';
+                btn.classList.add('border-amber-400/60', 'text-amber-300');
+            } else {
+                icon.className = 'fa-regular fa-star text-amber-400';
+                text.textContent = '파트너 등록';
+                btn.classList.remove('border-amber-400/60', 'text-amber-300');
+            }
+        }
+
+        // =========================================================================
+        // 6. DIGIVICE DETAIL MODAL & EVOLUTION NAVIGATION
+        // =========================================================================
+        function openDetailModal(id) {
+            const d = digimonDatabase.find(item => item.id === id);
+            if (!d) return;
+
+            currentModalDigimonId = id;
+            updateModalFavButton(id);
+
+            document.getElementById('modalNo').textContent = d.no;
+            document.getElementById('modalFieldBadge').textContent = d.field;
+            document.getElementById('modalArtwork').innerHTML = getDigimonSVG(d.artKey);
+            document.getElementById('modalTotalPower').textContent = getTotalPower(d.stats);
+
+            document.getElementById('modalStageBadge').textContent = d.stage;
+            const attrBadge = document.getElementById('modalAttrBadge');
+            attrBadge.textContent = d.attribute;
+            attrBadge.className = `px-2.5 py-0.5 rounded-md text-xs font-bold border ${getAttributeBadgeStyle(d.attribute)}`;
+            document.getElementById('modalTypeBadge').textContent = d.type;
+
+            document.getElementById('modalNameKo').textContent = d.nameKo;
+            document.getElementById('modalNameEn').textContent = d.nameEn;
+            document.getElementById('modalDesc').textContent = d.desc;
+
+            // Render Stat Bars
+            const statDefs = [
+                { key: 'hp', label: 'HP (체력)', color: 'bg-emerald-400' },
+                { key: 'atk', label: 'ATK (공격력)', color: 'bg-rose-500' },
+                { key: 'def', label: 'DEF (방어력)', color: 'bg-sky-400' },
+                { key: 'spd', label: 'SPD (스피드)', color: 'bg-amber-400' },
+                { key: 'int', label: 'INT (지능)', color: 'bg-purple-400' }
+            ];
+            document.getElementById('modalStatsContainer').innerHTML = statDefs.map(s => {
+                const val = d.stats[s.key];
+                return `
+                <div class="flex items-center gap-3 text-xs">
+                    <span class="w-24 font-mono text-slate-300 shrink-0">${s.label}</span>
+                    <div class="flex-1 h-2 bg-slate-800 rounded-full overflow-hidden">
+                        <div class="${s.color} h-full rounded-full transition-all duration-500" style="width: ${val}%"></div>
+                    </div>
+                    <span class="w-8 text-right font-cyber font-bold text-white">${val}</span>
+                </div>`;
+            }).join('');
+
+            // Render Special Moves
+            document.getElementById('modalSkillsContainer').innerHTML = d.skills.map(skill => `
+                <div class="p-3.5 rounded-xl bg-digi-bg border border-digi-border hover:border-digi-orange/50 transition-colors">
+                    <div class="font-bold text-xs sm:text-sm text-digi-orange mb-1">${skill.name}</div>
+                    <p class="text-xs text-slate-300 leading-relaxed">${skill.desc}</p>
+                </div>
+            `).join('');
+
+            // Render Interactive Evolution Line
+            renderEvolutionLine(d);
+
+            const modal = document.getElementById('detailModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function renderEvolutionLine(currentDigimon) {
+            const container = document.getElementById('modalEvoContainer');
+            const prevList = currentDigimon.evoPrev.map(pid => digimonDatabase.find(x => x.id === pid)).filter(Boolean);
+            const nextList = currentDigimon.evoNext.map(nid => digimonDatabase.find(x => x.id === nid)).filter(Boolean);
+
+            const createNodeHTML = (digimon, isCurrent = false) => `
+                <div onclick="${isCurrent ? '' : `openDetailModal(${digimon.id})`}" 
+                     class="${isCurrent ? 'border-cyan-400 bg-cyan-950/40 shadow-neon-cyan' : 'cursor-pointer border-slate-700 bg-digi-card hover:border-cyan-400'} border rounded-xl p-2.5 flex flex-col items-center w-28 text-center transition-all">
+                    <span class="text-[9px] font-mono ${isCurrent ? 'text-cyan-400 font-bold' : 'text-slate-400'}">${digimon.stage}</span>
+                    <div class="w-12 h-12 my-1">${getDigimonSVG(digimon.artKey)}</div>
+                    <span class="text-xs font-bold text-white truncate w-full">${digimon.nameKo}</span>
+                </div>
+            `;
+
+            let html = '';
+
+            // Previous Stage(s)
+            if (prevList.length > 0) {
+                html += `<div class="flex flex-wrap justify-center gap-2">${prevList.map(p => createNodeHTML(p, false)).join('')}</div>`;
+                html += `<div class="text-cyan-400 font-cyber text-sm px-1"><i class="fa-solid fa-angles-right"></i></div>`;
+            }
+
+            // Current Stage
+            html += createNodeHTML(currentDigimon, true);
+
+            // Next Stage(s)
+            if (nextList.length > 0) {
+                html += `<div class="text-digi-orange font-cyber text-sm px-1"><i class="fa-solid fa-angles-right"></i></div>`;
+                html += `<div class="flex flex-wrap justify-center gap-2">${nextList.map(n => createNodeHTML(n, false)).join('')}</div>`;
+            }
+
+            if (prevList.length === 0 && nextList.length === 0) {
+                html += `<span class="text-xs text-slate-400 ml-3">단독 궁극체 / 특수 진화 개체</span>`;
+            }
+
+            container.innerHTML = html;
+        }
+
+        function closeDetailModal(e) {
+            if (e.target.id === 'detailModal') {
+                forceCloseDetailModal();
+            }
+        }
+
+        function forceCloseDetailModal() {
+            const modal = document.getElementById('detailModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            currentModalDigimonId = null;
+        }
+
+        // Type Chart Modal Controls
+        function openTypeChartModal() {
+            const modal = document.getElementById('typeChartModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeTypeChartModal(e) {
+            if (e.target.id === 'typeChartModal') {
+                const modal = document.getElementById('typeChartModal');
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        }
+
+        // Close modals with ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                forceCloseDetailModal();
+                const typeModal = document.getElementById('typeChartModal');
+                typeModal.classList.add('hidden');
+                typeModal.classList.remove('flex');
+            }
+        });
+    </script>
+</body>
+</html>
